@@ -12,10 +12,10 @@ const Layout = () => {
 
   const [question, setQuestion] = useState({
     question: 'Question Next',
-    a: 'Question',
-    b: 'Question',
-    c: 'Question',
-    d: 'Question',
+    a: { answer: 'Question', score: 0 },
+    b: { answer: 'Question', score: 0 },
+    c: { answer: 'Question', score: 0 },
+    d: { answer: 'Question', score: 0 },
   })
 
   useEffect(() => {

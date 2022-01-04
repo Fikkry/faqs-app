@@ -19,37 +19,46 @@ const FaqState = (props) => {
     try {
       const data = [
         {
-          question: 'Which language runs in a web browser?',
-          a: 'Java',
-          b: 'C',
-          c: 'Python',
-          d: 'JavaScript',
-          correct: 'd',
+          question: 'Masalah gorilla',
+          a: { answer: 'Untuk apa seekor gorilla di dalam air ?', score: 30 },
+          b: {
+            answer: 'Untuk apa seekor gorilla di dalam gentong ?',
+            score: 10,
+          },
+          c: { answer: 'Untuk apa seekor gorilla di dalam toren ?', score: 20 },
+          d: {
+            answer: 'Untuk apa seekor gorilla shooting di spongebob ?',
+            score: 5,
+          },
         },
         {
-          question: 'What does CSS stand for?',
-          a: 'Central Style Sheets',
-          b: 'Cascading Style Sheets',
-          c: 'Cascading Simple Sheets',
-          d: 'Cars SUVs Sailboats',
-          correct: 'b',
+          question: 'Masalah gorilla',
+          a: { answer: 'Untuk apa seekor gorilla di dalam air ?', score: 30 },
+          b: {
+            answer: 'Untuk apa seekor gorilla di dalam gentong ?',
+            score: 10,
+          },
+          c: { answer: 'Untuk apa seekor gorilla di dalam toren ?', score: 20 },
+          d: {
+            answer: 'Untuk apa seekor gorilla shooting di spongebob ?',
+            score: 5,
+          },
         },
         {
-          question: 'What does HTML stand for?',
-          a: 'Hypertext Markup Language',
-          b: 'Hypertext Markdown Language',
-          c: 'Hyperloop Machine Language',
-          d: 'Helicopters Terminals Motorboats Lamborginis',
-          correct: 'a',
+          question: 'Umur',
+          a: { answer: '15 - 17', score: 5 },
+          b: { answer: '18 - 20', score: 20 },
+          c: { answer: '21 - 23', score: 15 },
+          d: { answer: '24 - 26', score: 10 },
         },
-        {
-          question: 'What year was JavaScript launched?',
-          a: '1996',
-          b: '1995',
-          c: '1994',
-          d: 'none of the above',
-          correct: 'b',
-        },
+        // {
+        //   question: 'What year was JavaScript launched?',
+        //   a: '1996',
+        //   b: '1995',
+        //   c: '1994',
+        //   d: 'none of the above',
+        //   correct: 'b',
+        // },
       ]
 
       dispatch({ type: GET_QUESTIONS, payload: data })
@@ -68,19 +77,23 @@ const FaqState = (props) => {
     const answer = getAnswer()
 
     if (answer) {
-      if (answer === state.questions[state.currentNumber].correct) {
-        state.score++
-      }
+      state.score = parseInt(state.score) + parseInt(answer.score)
 
       state.currentNumber++
 
       if (state.currentNumber < state.questions.length) {
         loadQuestion(state.questions[state.currentNumber])
       } else {
+        let product
+        if (state.score <= 40) {
+          product = 'Maneh kudu meuli produk A'
+        } else {
+          product = 'Maneh kudu meuli produk B'
+        }
         quiz.innerHTML = `
-              <h2>You answered ${state.score}/${state.questions.length} questions correctly</h2>
-              <button onclick="location.reload()">Reload</button>
-          `
+          <h2>${product}</h2>
+          <button onclick="location.reload()">Reload</button>
+        `
       }
     }
   }
@@ -89,15 +102,17 @@ const FaqState = (props) => {
     const answerEls = document.querySelectorAll('.answer')
 
     let answer
+    let score
 
     answerEls.forEach((answerEl) => {
       if (answerEl.checked) {
         answerEl.checked = false
         answer = answerEl.id
+        score = answerEl.getAttribute('data-score')
       }
     })
 
-    return answer
+    return { answer: answer, score: score }
   }
 
   return (

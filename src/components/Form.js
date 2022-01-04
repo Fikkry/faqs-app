@@ -6,30 +6,54 @@ const Form = ({ question }) => {
       <h2 id="question">{question.question}</h2>
       <ul>
         <li key="a">
-          <input type="radio" name="answer" id="a" className="answer" />
+          <input
+            type="radio"
+            name="answer"
+            id="a"
+            className="answer"
+            data-score={question.a.score}
+          />
           <label htmlFor="a" id="a_text">
-            {question.a}
+            {question.a.answer}
           </label>
         </li>
 
         <li key="b">
-          <input type="radio" name="answer" id="b" className="answer" />
+          <input
+            type="radio"
+            name="answer"
+            id="b"
+            className="answer"
+            data-score={question.b.score}
+          />
           <label htmlFor="b" id="b_text">
-            {question.b}
+            {question.b.answer}
           </label>
         </li>
 
         <li key="c">
-          <input type="radio" name="answer" id="c" className="answer" />
+          <input
+            type="radio"
+            name="answer"
+            id="c"
+            className="answer"
+            data-score={question.c.score}
+          />
           <label htmlFor="c" id="c_text">
-            {question.c}
+            {question.c.answer}
           </label>
         </li>
 
         <li key="d">
-          <input type="radio" name="answer" id="d" className="answer" />
+          <input
+            type="radio"
+            name="answer"
+            id="d"
+            className="answer"
+            data-score={question.d.score}
+          />
           <label htmlFor="d" id="d_text">
-            {question.d}
+            {question.d.answer}
           </label>
         </li>
       </ul>
